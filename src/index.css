@@ -1,13 +1,51 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html{
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*,
+*::before,
+*::after{
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background-color: #EBEEF3;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 22px;
+  font-weight: 400;
+/* font-family: 'Roboto', sans-serif; */
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  max-width: 960px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+
+.ant-pagination .ant-pagination-item a {
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.ant-pagination .ant-pagination-item-active {
+    border-color: #1890FF;
+    background-color: #1890FF;
+    border-radius: 4px;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+    color: #fff;
+}
+
+.ant-pagination .ant-pagination-item-active:hover a {
+    color: rgba(0, 0, 0, 0.65)
 }

@@ -1,0 +1,64 @@
+.header{
+  background-color: #fff;
+  // background-color: red;
+  padding: 16px 22px;
+  
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  &__btn,
+  &__logo,
+  &__user-name,
+  &__btn-logout{
+    font-size: 18px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+  }
+
+  &__btn{
+    padding: 6px 18px 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: .5s;
+    &:hover{
+      border-color: #52C41A;
+      color: #52C41A
+    }
+  }
+
+  a:nth-child(2) {
+    margin-left: auto;
+    margin-right: 20px;
+  }
+
+  &__user-name{
+    &:hover .header__avatar{
+      transform: scale(1.1)
+    } 
+  }
+
+  &__avatar{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 13px;
+    transition: .5s;
+  }
+
+  &__btn-logout{
+    padding: 6px 18px 10px;
+    transition: .5s;
+    border: 1px solid transparent;
+    margin-left: 27px;
+    &:hover{
+      border-color: rgba(0, 0, 0, 0.75);
+      border-radius: 5px;
+    }
+  }
+
+}
