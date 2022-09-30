@@ -22,10 +22,9 @@ function ArticlePageMain({
   setLikeArticle,
   delLikeArticle,
 }) {
-  const { article: newArticle, articleSlug, loading, error, errorText } = state
+  const { article: newArticle, articleSlug, loading, loginStatus, error, errorText } = state
   const [confirm, setConfirm] = useState(false)
   const [editStatus, setEditStatus] = useState(false)
-
   const abortConRef = useRef()
 
   useEffect(() => {
@@ -64,10 +63,12 @@ function ArticlePageMain({
       history.push(`/articles/${newArticle.slug}/edit`)
     }
     const clickLikeBtn = () => {
-      if (favorited) {
-        delLikeArticle(slug, abortConRef, 'articlesCurrent')
-      } else {
-        setLikeArticle(slug, abortConRef, 'articlesCurrent')
+      if (loginStatus) {
+        if (favorited && loginStatus) {
+          delLikeArticle(slug, abortConRef, 'articlesCurrent')
+        } else {
+          setLikeArticle(slug, abortConRef, 'articlesCurrent')
+        }
       }
     }
 
@@ -109,9 +110,6 @@ function ArticlePageMain({
               height="14"
               viewBox="0 0 14 14"
               fill="none"
-              onClick={() => {
-                setLikeArticle(slug)
-              }}
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -142,6 +140,7 @@ function ArticlePageMain({
               <svg
                 className={articles['articles__like-img']}
                 onClick={clickLikeBtn}
+                disabled={!loginStatus}
                 width="16"
                 height="16"
                 viewBox="0 0 16 16"

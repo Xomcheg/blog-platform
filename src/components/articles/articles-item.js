@@ -7,17 +7,20 @@ import * as actions from '../actions/actions'
 import { ArticlesItemTag } from './articles-item-tag'
 import articles from './articles.module.scss'
 
-function ArticlesItemMain({ item, articleClick, setLikeArticle, delLikeArticle, checkArticlesArr }) {
+function ArticlesItemMain({ item, articleClick, setLikeArticle, delLikeArticle, checkArticlesArr, state }) {
   const { title, description, favoritesCount, author, createdAt, tagList, slug, favorited } = item
   const { username, image } = author
+  const { loginStatus } = state
   const createDate = format(new Date(createdAt), 'PPP')
   const abortConRef = useRef()
 
   const clickLikeBtn = () => {
-    if (favorited) {
-      delLikeArticle(slug, abortConRef, checkArticlesArr)
-    } else {
-      setLikeArticle(slug, abortConRef, checkArticlesArr)
+    if (loginStatus) {
+      if (favorited) {
+        delLikeArticle(slug, abortConRef, checkArticlesArr)
+      } else {
+        setLikeArticle(slug, abortConRef, checkArticlesArr)
+      }
     }
   }
 

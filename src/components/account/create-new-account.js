@@ -30,19 +30,15 @@ function CreateNewAccountMain({
   } = state
 
   const {
-    register, //  позщволяет регистрировать различные поля для формы
-    formState: { errors, isValid }, // объект у которого есть различные свойства, нам понадобится свойство - ошибки errors
+    register,
+    formState: { errors, isValid },
     handleSubmit,
-    //  обертка над нашим кастомным хендлером/отправки формы, позволяет производить различные действия с валидацией, а внутри хука handleSubmit()
-    //  будем уже использовать свои дополнительные настройки валидации, так же handleSubmit() передает в нашу написанную функцию onSubmit параметры формы,
-    // onSubmit сработает только когда в форме не будет ошибок
-    reset, // вызываем когда необходимо очистить поля формы
+    reset,
     watch,
     setError,
   } = useForm({
-    mode: 'onChange', // можно передать настройки которые говорят когда будет срабатывать валидация, в нашем случае onChange
+    mode: 'onChange',
   })
-  // useForm - это метод который возвращает объект
 
   const onSubmit = (data) => {
     if (accountCheckInformation) {
@@ -87,21 +83,16 @@ function CreateNewAccountMain({
             placeholder="Username"
             //
             {...register('userName', {
-              required: 'Enter user name', // говорит, что поле обязательное лдля заполнения и фокусит его required: true
+              required: 'Enter user name',
               minLength: {
                 value: 3,
                 message: 'From 3 to 20 symbols',
               },
               maxLength: 20,
-            })} // передаем 2 параметра 1-ый это уникальное имя (фналог name='userName'), для работы с валидацией register принимает
-            // 2-ой параметр - объект
-            //  используем деструктуризацию чтобы те методы которые есть в объекте useForm сразу на наш input добавить (name, value, onchange, onblure и т.д.)
-            // {...test}
+            })}
           />
           <div className={account['account__form-error']}>
             {errors?.userName && <p>{errors?.userName?.message || 'Error!'} </p>}
-            {/* Проверяем существует ли errors и есть ли у него ключ userName, и если по этому имени будет какая-то ошибка, не соответствие условиям 
-      прописанным в  {...register('userName',{условия})}то мы выполняем определенное действие */}
           </div>
         </div>
         <div className={account['account__form-wrapper']}>
@@ -126,7 +117,6 @@ function CreateNewAccountMain({
             {errors?.emailAddress && <p>{errors?.emailAddress?.message || 'Error!'} </p>}
           </div>
         </div>
-        {/* ---------------------------------password---------------------------------------------- */}
         <div className={account['account__form-wrapper']}>
           <label className={account.account__suptitle} htmlFor="password">
             Password
@@ -139,7 +129,7 @@ function CreateNewAccountMain({
             {...register('password', {
               required: 'Поле обязательно к заполнению',
               minLength: {
-                value: 1,
+                value: 6,
                 message: 'Your password needs to be at least 6 characters.',
               },
               maxLength: 40,
