@@ -1,3 +1,3 @@
-import Articles from './articles'
+import { Articles } from './articles'
 
-export default Articles
+export { Articles }

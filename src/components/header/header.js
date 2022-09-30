@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import defaultAvatar from '../../images/default-avatar.png'
 
 import header from './header.module.scss'
 
-function Header({ loginStatus, logOutUser, userData }) {
+export function Header({ loginStatus, logOutUser, userData, checkLoginUser }) {
   const { username, image } = userData
 
   let avatar
@@ -14,6 +14,10 @@ function Header({ loginStatus, logOutUser, userData }) {
   } else {
     avatar = <img className={header.header__avatar} src={image} alt="avatar" />
   }
+
+  useEffect(() => {
+    checkLoginUser()
+  }, [])
 
   let elements
   if (!loginStatus) {
@@ -36,6 +40,9 @@ function Header({ loginStatus, logOutUser, userData }) {
         <Link to="/articles" className={header.header__logo}>
           Realworld Blog
         </Link>
+        <Link to="/my-articles" className={header.header__btn}>
+          My articles
+        </Link>
         <Link to="/new-article" className={header.header__btn}>
           Create article
         </Link>
@@ -51,4 +58,3 @@ function Header({ loginStatus, logOutUser, userData }) {
   }
   return <header className={header.header}>{elements}</header>
 }
-export default Header

@@ -1,3 +1,3 @@
-import createNewAccount from './create-new-account'
+import { CreateNewAccount } from './create-new-account'
 
-export default createNewAccount
+export { CreateNewAccount }

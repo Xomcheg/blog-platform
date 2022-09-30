@@ -4,7 +4,7 @@ import { Spin } from 'antd'
 import spinner from './spinner.module.scss'
 import 'antd/dist/antd.css'
 
-function Spinner() {
+export function Spinner() {
   return (
     <div className={spinner.example}>
       <Spin size="large" />
@@ -12,5 +12,3 @@ function Spinner() {
     </div>
   )
 }
-
-export default Spinner

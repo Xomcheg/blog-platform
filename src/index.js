@@ -8,8 +8,8 @@ import reduxThunc from 'redux-thunk'
 import 'antd/dist/antd.css'
 import './index.css'
 
-import App from './components/app'
-import reducer from './components/reducer'
+import { App } from './components/app'
+import { reducer } from './components/reducer'
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

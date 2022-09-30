@@ -6,7 +6,6 @@
     filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.15));
     padding: 15px 16px 24px;
     position: relative;
-    cursor: pointer;
     & + & {
       margin-top: 26px;
     }
@@ -22,6 +21,11 @@
     line-height: 28px;
     color: #1890FF;
     margin: 0;
+    cursor: pointer;
+    transition: .4s;
+    &:hover{
+      transform: scale(1.1)
+    }
   }
 
   &__like{
@@ -31,11 +35,17 @@
   
   &__like-img{
     fill: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    transition: .3s;
+    &:hover {
+      transform: scale(1.2)
+    }
   }
 
   &__like-counter{
     line-height: 22px;
     color: rgba(0, 0, 0, 0.75);
+    margin-top: 2px;
   }
 &__tag-wrapper {
   margin-left: -8px;
@@ -54,14 +64,20 @@
   }
   
   &__persone {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 15px;
+    right: 14px;
+  }
+
+  &__persone-wrapper {
     min-width: 141px;
     text-align: right;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
-    top: 15px;
-    right: 14px;
+
   }
 
   &__persone-data{
@@ -102,7 +118,107 @@
     text-align: center;
   }
 
+  &__buttons{
+    margin-top: 30px;
+    text-align: right;
+  }
 
+  &__button-del,
+  &__button-edit{
+    font-size: 14px;
+    line-height: 22px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s;
+    background-color: transparent;
+    &:hover{
+      transform: scale(1.1)
+    }
+  }
+
+  &__button-del{
+    border-color: #F5222D;
+    color: #F5222D;
+    padding: 6px 17px;
+  }
+
+  &__button-edit{
+    border-color: #52C41A;
+    color: #52C41A;
+    padding: 6px 19px;
+    margin-left: 12px;
+    display: inline-block;
+    background-color: transparent;
+    &:hover{
+      color: #52C41A;
+    }
+  }
+
+  &__confirm-message {
+    display: none;
+    position: absolute;
+    width: 246px;
+    padding: 12px 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    top: 74px;
+    right: -180px;
+    filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+    &::before{
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: -20px;
+      border: 10px solid transparent; 
+      border-right: 10px solid #fff;
+    }
+  }
+
+  &__confirm-title{
+    font-size: 14px;
+    line-height: 22px;
+    color: #595959;
+    margin-bottom: 12px;
+    text-align: left;
+    display: flex;
+  }
+
+  &__confirm-text{
+    margin-left: 8px;
+    display: inline-block;
+  }
+
+  &__confirm-icon{
+    width: 19px;
+    height: 19px;
+  }
+
+  &__confirm-btn{
+    font-size: 14px;
+    line-height: 22px;
+    color: #595959;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    transition: .5s;
+    padding: 1px 8px;
+    cursor: pointer;
+    &:hover {
+      color: #fff;
+      background-color: #1890FF;
+      border-color: #1890FF
+    }
+    &:last-child{
+      margin-left: 8px;
+    }
+  }
+
+}
+
+.articles__buttons.articles__buttons--active{
+  .articles__confirm-message{
+    display: block;
+  }
 }
 
 .article{
@@ -111,5 +227,14 @@
     line-height: 22px;
     color: rgba(0, 0, 0, 0.5);
     margin: 19px 0 25px;
+  }
+}
+
+.articles__page{
+  .articles__title{
+    cursor: default;
+    &:hover{
+      transform: none
+    }
   }
 }

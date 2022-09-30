@@ -5,7 +5,8 @@ const reducer = (state, action) => {
       articles: [],
       articlesCount: '',
       article: null,
-      loading: true,
+      articleSlug: '',
+      loading: false,
       error: false,
       errorText: '',
       page: 1,
@@ -16,6 +17,9 @@ const reducer = (state, action) => {
       statusSubmitForm: false,
       loginStatus: false,
       userData: {},
+      infoMessage: '',
+      myArticlesData: [],
+      tags: [],
     }
   }
 
@@ -31,17 +35,43 @@ const reducer = (state, action) => {
       }
     }
     case 'setArticle': {
+      let newArticle
+      if (action.payload === null) {
+        newArticle = null
+      } else if (action.payload !== 'redirect') {
+        newArticle = action.payload.article
+      } else {
+        newArticle = action.payload
+      }
       return {
         ...state,
-        article: action.payload.article,
+        article: newArticle,
         error: false,
         errorText: '',
+      }
+    }
+    case 'setNewArticleSlug': {
+      let newSlug
+      if (action.payload !== '') {
+        newSlug = action.payload.article.slug
+      } else {
+        newSlug = action.payload
+      }
+      return {
+        ...state,
+        articleSlug: newSlug,
       }
     }
     case 'setNewPage': {
       return {
         ...state,
         page: action.payload,
+      }
+    }
+    case 'setInfoMessage': {
+      return {
+        ...state,
+        infoMessage: action.payload,
       }
     }
     case 'accountCheckInformationClick':
@@ -59,8 +89,36 @@ const reducer = (state, action) => {
         statusSubmitForm: !state.statusSubmitForm,
       }
     }
+    case 'setNewTag': {
+      let newArr
+      if (action.payload === null) {
+        newArr = []
+      } else {
+        newArr = [...state.tags]
+        newArr.push(action.payload)
+      }
+      return {
+        ...state,
+        tags: newArr,
+      }
+    }
+    case 'removeTag': {
+      const { newTag } = action.payload
+      const oldArr = [...state.tags]
+      const idx = oldArr.indexOf(newTag)
+      const newArr = [...oldArr.slice(0, idx), ...oldArr.slice(idx + 1)]
+      return {
+        ...state,
+        tags: newArr,
+      }
+    }
+    case 'removeTagList': {
+      return {
+        ...state,
+        tags: action.payload,
+      }
+    }
     case 'responseRegisterServerError': {
-      console.log('payload', action.payload.errors)
       const { errors } = action.payload
       return {
         ...state,
@@ -76,12 +134,68 @@ const reducer = (state, action) => {
       return { ...state, loginStatus: action.payload }
     }
     case 'setUserData': {
-      console.log('setUserData', action.payload)
       return { ...state, userData: action.payload }
+    }
+    case 'setMyArticlesData': {
+      return {
+        ...state,
+        myArticlesData: action.payload.articles,
+        error: false,
+        errorText: '',
+        loading: false,
+      }
+    }
+    case 'setLikeStatus': {
+      const { articles, myArticlesData, article } = state
+      const newState = { ...state }
+      let checkArticles
+      let name
+      if (action.arrName === 'articlesCurrent') {
+        let newElem
+        if (action.operation === 'inc') {
+          newElem = { ...article, favorited: !article.favorited, favoritesCount: article.favoritesCount + 1 }
+        }
+        if (action.operation === 'dec') {
+          newElem = { ...article, favorited: !article.favorited, favoritesCount: article.favoritesCount - 1 }
+        }
+        return {
+          ...state,
+          article: newElem,
+        }
+      }
+      if (action.arrName === 'myArticles') {
+        checkArticles = myArticlesData
+        name = 'myArticlesData'
+      } else if (action.arrName === 'articles') {
+        checkArticles = articles
+        name = 'articles'
+      }
+      const idx = checkArticles.findIndex((item) => item.slug === action.payload)
+      let newElem
+      if (action.operation === 'inc') {
+        newElem = {
+          ...checkArticles[idx],
+          favorited: !checkArticles[idx].favorited,
+          favoritesCount: checkArticles[idx].favoritesCount + 1,
+        }
+      }
+      if (action.operation === 'dec') {
+        newElem = {
+          ...checkArticles[idx],
+          favorited: !checkArticles[idx].favorited,
+          favoritesCount: checkArticles[idx].favoritesCount - 1,
+        }
+      }
+
+      const newArr = [...checkArticles.slice(0, idx), newElem, ...checkArticles.slice(idx + 1)]
+      newState[name] = newArr
+      return {
+        ...newState,
+      }
     }
     default:
       return state
   }
 }
 
-export default reducer
+export { reducer }

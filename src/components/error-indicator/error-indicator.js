@@ -3,7 +3,7 @@ import { Alert } from 'antd'
 
 import errorIndicator from './error-indicator.module.scss'
 
-function ErrorIndicator(props) {
+export function ErrorIndicator(props) {
   const { message } = props
 
   return (
@@ -12,5 +12,3 @@ function ErrorIndicator(props) {
     </div>
   )
 }
-
-export default ErrorIndicator

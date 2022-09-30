@@ -153,3 +153,51 @@
     margin-top: 21px
   }
 }
+
+.create__article{
+  width: 100%;
+  max-width: 100%;
+
+  .account{
+    &__btn{
+      max-width: 319px;
+      margin-top: 21px;
+    }
+    &__text-main{
+      min-height: 168px;
+      resize: none
+    }
+  }
+  
+  .account__form-wrapper.account__form-wrapper{
+    margin-top: 21px;
+  }
+
+  &-message{
+    text-align: center;
+    font-size: 18px;
+    padding-bottom: 10px;
+    color: #1dc008;
+    position: relative;
+
+  }
+
+  &-message-status{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: #1dc008;
+    position: relative;
+    display: inline-block;
+    margin-right: 5px;
+    top: 3px;
+    &::before {
+      content: '\2713';
+      position: absolute;
+      top: 0;
+      left: 3px;
+      color: #fff;
+    }
+  }
+
+}

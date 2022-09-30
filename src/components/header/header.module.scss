@@ -1,6 +1,5 @@
 .header{
   background-color: #fff;
-  // background-color: red;
   padding: 16px 22px;
   
   &__wrapper {
@@ -36,6 +35,7 @@
   }
 
   &__user-name{
+    margin-left: 22px;
     &:hover .header__avatar{
       transform: scale(1.1)
     } 
